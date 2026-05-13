@@ -1,4 +1,4 @@
-title: 主页
+标题：主页
 
 # [神经网络](https://github.com/OpenHUTB/nn)
 
@@ -24,7 +24,7 @@ title: 主页
 
 [__softmax回归__](softmax_regression.md)
 
-[__线性回归和softmax回归改进__](softmax_regression_improved.md)
+[__线性回归与Softmax回归改进__](softmax_regression_improved.md)
 
 [__支持向量机__](svm.md)
 
@@ -43,6 +43,8 @@ title: 主页
 [__注意力机制__](attention.md)
 
 [__高斯混合__](gaussian_mixture.md)
+
+[__高斯混合改进__](chap11_gaussian_mixture/README.md)
 
 [__受限玻尔兹曼机__](RBM.md)
 
@@ -68,7 +70,7 @@ title: 主页
 
 [__无人机飞行控制__](./UVA_flight_control_system.md) - 基于AirSim的无人机飞行控制系统
 
-[__人形机器人平衡控制__](./humanoid_balance/Humanoid_Balance.md) - 基于强化学习的人形机器人平衡控制仿真
+__](./humanoid_balance/Humanoid_Balance.md)- 基于强化学习的仿人机器人平衡控制仿真
 
 [__工程规范优化__](./improve/project.md) - 多场景仿真与控制优化项目
 
