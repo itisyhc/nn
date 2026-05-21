@@ -216,39 +216,6 @@ log_pi = self._safe_log(self.pi)
 ```
 
 ### 4.3 k-means++ 初始化
-### 4.2 安全数学运算（数值稳定性核心）
-
-为避免 EM 算法迭代过程中的数值问题，实现了安全对数计算和安全除法：
-
-```python
-def _safe_log(self, x):
-    """安全对数计算，避免 log(0)"""
-    return np.log(np.maximum(x, self.eps))
-
-def _safe_divide(self, numerator, denominator):
-    """安全除法，避免除零"""
-    return numerator / np.maximum(denominator, self.eps)
-```
-
-**数值裁剪应用**：在 EM 算法的关键步骤中进行数值裁剪，确保数值稳定性：
-
-```python
-# E步：裁剪gamma值，避免极端值影响计算
-gamma = np.exp(log_prob - log_prob_sum)
-gamma = np.clip(gamma, self.eps, 1 - self.eps)
-
-# M步：裁剪Nk值，避免除零
-Nk = np.sum(gamma, axis=0)
-Nk = np.maximum(Nk, self.eps)
-
-# 使用安全除法计算新均值
-new_mu = self._safe_divide(np.sum(gamma_X, axis=0), Nk[:, np.newaxis])
-
-# 使用安全对数计算混合权重的对数
-log_pi = self._safe_log(self.pi)
-```
-
-### 4.3 k-means++ 初始化
 
 k-means++ 以平方距离为权重进行概率采样，使初始中心点尽量分散：
 
@@ -271,7 +238,6 @@ def _kmeans_plus_plus_init(self, X):
 ```
 
 ### 4.4 AIC/BIC 模型选择
-### 4.4 AIC/BIC 模型选择
 
 ```python
 def _compute_aic_bic(self, X):
@@ -284,7 +250,6 @@ def _compute_aic_bic(self, X):
     self.bic_ = total_params * np.log(n_samples) - 2 * log_likelihood
 ```
 
-### 4.5 向量化 EM 算法
 ### 4.5 向量化 EM 算法
 
 通过批量矩阵运算替代 Python 循环，显著提升计算效率：
@@ -329,7 +294,6 @@ def _compute_statistics_vectorized(self, X, gamma):
 - 提升大规模数据（10000+ 样本）的处理速度
 
 ### 4.6 多线程并行加速
-### 4.6 多线程并行加速
 
 通过 `concurrent.futures.ThreadPoolExecutor` 实现多线程并行计算，进一步提升大规模数据的处理效率：
 
@@ -365,7 +329,6 @@ def _log_gaussian_parallel(self, X, mu, sigma):
 - 特别适合大规模数据和多成分场景
 
 ### 4.7 协方差类型扩展
-### 4.7 协方差类型扩展
 
 支持四种协方差类型，适用于不同的数据分布特性：
 
@@ -381,7 +344,6 @@ def _log_gaussian_parallel(self, X, mu, sigma):
 - 各类别分布相似 → `tied`（共享协方差）
 - 需要捕捉复杂相关性 → `full`（完整协方差）
 
-### 4.8 异常检测扩展
 ### 4.8 异常检测扩展
 
 基于密度估计的异常检测功能，可识别远离聚类中心的离群点：
