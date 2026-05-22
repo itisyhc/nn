@@ -128,7 +128,11 @@ control.steer   += np.clip(target_steer - control.steer, -steer_step, steer_step
 
 ## 4. 棘手环境问题排查与修复记录
 
+<<<<<<< HEAD
+在实际部署过程中，遇到了 Windows 系统与 Git 底层交互的特定报错，以下是详细排雷过程，具有极高的教学参考价值。
+=======
 在实际部署过程中，遇到了 Windows 系统与 Git 底层交互的特定报错，以下是详细排雷过程，具有较高的教学参考价值。
+>>>>>>> upstream/main
 
 **故障 1：幽灵文件 `nul` 索引错误**
 
